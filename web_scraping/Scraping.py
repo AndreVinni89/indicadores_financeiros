@@ -1,10 +1,22 @@
 from time import sleep
-
+from selenium import webdriver
 
 class Scraping:
-    def __init__(self, driver, url):
-        self.driver = driver
+    def __init__(self, url):
+        print('[Scrap] Initializing...')
+        self.driver = webdriver.Chrome()
         self.url = url
+        print('[Scrap] Initialized!')
+
+    def run(self):
+        print('[Scrap] Accessing the URL...')
+        self.access_url()
+        print('[Scrap] URL access successful!')
+
+        print('[Scrap] Downnloading...')
+        self.download()
+        print('[Scrap] Downloaded Successful!')
+
 
     def access_url(self):
         self.driver.get(self.url)
@@ -15,4 +27,5 @@ class Scraping:
         self.driver.find_element_by_class_name('find').click()
         sleep(3)
         self.driver.find_element_by_class_name('btn-download').click()
-        sleep(3)
+        sleep(4)
+        self.driver.close()
